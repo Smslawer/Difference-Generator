@@ -11,11 +11,17 @@ plugins {
     id 'checkstyle'
 }
 
+dependencies {
+    implementation 'info.picocli:picocli:4.6.2'
+//    annotationProcessor 'info.picocli:picocli-codegen:4.6.2'
+}
+
 application {
     mainClass = 'hexlet.code.App'
 }
 compileJava {
     options.release = 16
+//    options.compilerArgs += ["-Aproject=${project.group}/${project.name}"]
 }
 repositories {
     mavenCentral()
