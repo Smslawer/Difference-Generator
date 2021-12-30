@@ -11,9 +11,12 @@ plugins {
     id 'checkstyle'
 }
 
+group = 'hexlet.code'
+version = '1.0-SNAPSHOT'
+
 dependencies {
     implementation 'info.picocli:picocli:4.6.2'
-//    annotationProcessor 'info.picocli:picocli-codegen:4.6.2'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.1'
 }
 
 application {
@@ -21,7 +24,6 @@ application {
 }
 compileJava {
     options.release = 16
-//    options.compilerArgs += ["-Aproject=${project.group}/${project.name}"]
 }
 repositories {
     mavenCentral()
@@ -31,5 +33,3 @@ checkstyle {
     configFile = file("${rootDir}/checkstyle.xml")
 }
 
-group = 'hexlet.code'
-version = '1.0-SNAPSHOT'
