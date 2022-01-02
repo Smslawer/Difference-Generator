@@ -20,15 +20,15 @@ class DifferTest {
                   + timeout: 20
                   + verbose: true
                 }""";
-        String actual = Differ.generate(new File("/home/alexey/java-project-lvl2/src/test/resources/filepath1.json"),
-                new File("/home/alexey/java-project-lvl2/src/test/resources/filepath2.json"));
+        String actual = Differ.generate(new File("./src/test/resources/filepath1.json"),
+                new File("./src/test/resources/filepath2.json"));
         assertThat(expected).isEqualTo(actual);
     }
     @Test
     void testDifferIfEmpty() throws Exception {
         String expected = "one of the files is empty";
-        String actual = Differ.generate(new File("/home/alexey/java-project-lvl2/src/test/resources/filepath1.json"),
-                new File("/home/alexey/java-project-lvl2/src/test/resources/result.json"));
+        String actual = Differ.generate(new File("./src/test/resources/filepath1.json"),
+                new File("./src/test/resources/result.json"));
         assertThat(expected).isEqualTo(actual);
     }
 }
