@@ -6,9 +6,6 @@ import picocli.CommandLine.Option;
 import picocli.CommandLine.Parameters;
 
 import java.io.File;
-import java.math.BigInteger;
-import java.nio.file.Files;
-import java.security.MessageDigest;
 import java.util.concurrent.Callable;
 
 
@@ -26,9 +23,13 @@ public class App implements Callable<Integer> {
             defaultValue = "stylish", description = "output format [default: stylish]")
     private String format = "stylish";
 
+
+    /**
+    Only print method generate().
+    */
     @Override
     public Integer call() throws Exception {
-        System.out.println(Differ.generate());
+        System.out.println(Differ.generate(filepath1, filepath2));
         return 0;
     }
 

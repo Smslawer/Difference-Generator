@@ -3,44 +3,46 @@ package hexlet.code;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.File;
-import java.nio.file.Files;
-import java.util.Map;
-import java.util.Set;
+import java.io.IOException;
 import java.util.TreeMap;
-import java.util.TreeSet;
 
 public class Differ {
-    public String host;
-    public String timeout;
-    public String proxy;
-    public String follow;
-    public static void main(String[] args) throws Exception {
-        System.out.println(generate());
-    }
+    private String host;
+    private String timeout;
+    private String proxy;
+    private String follow;
 
-    public static String generate() throws Exception {
+    public static String generate(File filepath1, File filepath2) throws Exception {
         ObjectMapper mapper = new ObjectMapper();
-        String result = "{ \n";
-        TreeMap valueFilepath1 = mapper.readValue(new File("filepath1.json"), TreeMap.class);
-        TreeMap valueFilepath2 = mapper.readValue(new File("filepath2.json"), TreeMap.class);
-        for (Object key: valueFilepath1.keySet()) {
+        StringBuilder result = new StringBuilder("{ \n");
+        TreeMap<String, Object> valueFilepath1 = mapper.readValue(filepath1, TreeMap.class);
+        TreeMap<String, Object> valueFilepath2 = mapper.readValue(filepath2, TreeMap.class);
+        if (valueFilepath1.isEmpty() || valueFilepath2.isEmpty()) {
+            return "one of the files is empty";
+        }
+        for (String key : valueFilepath1.keySet()) {
             if (valueFilepath2.containsKey(key)) {
                 if (valueFilepath1.get(key).equals(valueFilepath2.get(key))) {
-                    result = result + "    " + key + ": " + valueFilepath1.get(key).toString() + "\n";
+                    result.append("    ").append(key).append(": ")
+                            .append(valueFilepath1.get(key).toString()).append("\n");
                 } else {
-                    result = result + "  - " + key + ": " + valueFilepath1.get(key).toString() + "\n";
-                    result = result + "  + " + key + ": " + valueFilepath2.get(key).toString() + "\n";
+                    result.append("  - ").append(key).append(": ")
+                            .append(valueFilepath1.get(key).toString()).append("\n");
+                    result.append("  + ").append(key).append(": ")
+                            .append(valueFilepath2.get(key).toString()).append("\n");
                 }
             } else {
-                result = result + "  - " + key + ": " + valueFilepath1.get(key).toString() + "\n";
+                result.append("  - ").append(key).append(": ")
+                        .append(valueFilepath1.get(key).toString()).append("\n");
             }
         }
-        for (Object key: valueFilepath2.keySet()) {
+        for (String key : valueFilepath2.keySet()) {
             if (!valueFilepath1.containsKey(key)) {
-                result = result + "  + " + key + ": " + valueFilepath2.get(key).toString() + "\n";
+                result.append("  + ").append(key).append(": ")
+                        .append(valueFilepath2.get(key).toString()).append("\n");
             }
         }
-        result = result + "}";
-        return result;
+        result.append("}");
+        return result.toString();
     }
 }
