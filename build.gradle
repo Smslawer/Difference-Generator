@@ -43,13 +43,13 @@ jacocoTestReport {
     reports {
         xml.required = true
         csv.required = false
-        html.outputLocation = layout.buildDirectory.dir('jacocoHtml')
+//        html.outputLocation = layout.buildDirectory.dir('jacoco')
     }
 }
 
 jacoco {
     toolVersion = "0.8.7"
-    reportsDirectory = layout.buildDirectory.dir('customJacocoReportDir')
+//    reportsDirectory = layout.buildDirectory.dir('customJacocoReportDir')
 }
 
 checkstyle {
