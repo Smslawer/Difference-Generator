@@ -12,9 +12,9 @@ jobs:
           distribution: 'zulu'
           java-version: '16'
       - run: make build
-    - name: Test code coverage
-      uses: paambaati/codeclimate-action@v3.0.0
-      env:
-        CC_TEST_REPORTER_ID: ${{secrets.TEST_COVEREGE_ID}}
-      with:
-        coverageCommand: make test-Jacoco
+      - name: Test code coverage
+        uses: paambaati/codeclimate-action@v3.0.0
+        env:
+          CC_TEST_REPORTER_ID: ${{secrets.TEST_COVEREGE_ID}}
+        with:
+          coverageCommand: make test-Jacoco
