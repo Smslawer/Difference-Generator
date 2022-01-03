@@ -20,5 +20,5 @@ build:
 test:
 	./gradlew test
 
-test-Jacoco:
+report:
 	./gradlew jacocoTestReport
