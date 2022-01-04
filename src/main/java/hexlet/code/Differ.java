@@ -8,16 +8,11 @@ import java.io.IOException;
 import java.util.TreeMap;
 
 public class Differ {
-    private String host;
-    private String timeout;
-    private String proxy;
-    private String follow;
 
     public static String generate(File filepath1, File filepath2) throws IOException {
-        ObjectMapper mapper = new ObjectMapper();
         StringBuilder result = new StringBuilder("{ \n");
-        TreeMap<String, Object> valueFilepath1 = mapper.readValue(filepath1, new TypeReference<>() { });
-        TreeMap<String, Object> valueFilepath2 = mapper.readValue(filepath2, new TypeReference<>() { });
+        TreeMap<String, Object> valueFilepath1 = parse(filepath1);
+        TreeMap<String, Object> valueFilepath2 = parse(filepath2);
         if (valueFilepath1.isEmpty() || valueFilepath2.isEmpty()) {
             return "one of the files is empty";
         }
@@ -45,5 +40,10 @@ public class Differ {
         }
         result.append("}");
         return result.toString();
+    }
+
+    public static TreeMap<String, Object> parse(File filepath) throws IOException {
+        ObjectMapper mapper = new ObjectMapper();
+        return mapper.readValue(filepath, new TypeReference<>() { });
     }
 }

@@ -8,7 +8,7 @@ check-updates:
 	./gradlew dependencyUpdates
 
 lint:
-	./gradlew checkstyleMain
+	./gradlew checkstyleMain checkstyleTest
 
 .PHONY: build
 
