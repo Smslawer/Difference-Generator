@@ -1,8 +1,5 @@
 package hexlet.code;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.TreeMap;
@@ -11,8 +8,8 @@ public class Differ {
 
     public static String generate(File filepath1, File filepath2) throws IOException {
         StringBuilder result = new StringBuilder("{ \n");
-        TreeMap<String, Object> valueFilepath1 = parse(filepath1);
-        TreeMap<String, Object> valueFilepath2 = parse(filepath2);
+        TreeMap<String, Object> valueFilepath1 = Parser.parse(filepath1);
+        TreeMap<String, Object> valueFilepath2 = Parser.parse(filepath2);
         if (valueFilepath1.isEmpty() || valueFilepath2.isEmpty()) {
             return "one of the files is empty";
         }
@@ -40,10 +37,5 @@ public class Differ {
         }
         result.append("}");
         return result.toString();
-    }
-
-    public static TreeMap<String, Object> parse(File filepath) throws IOException {
-        ObjectMapper mapper = new ObjectMapper();
-        return mapper.readValue(filepath, new TypeReference<>() { });
     }
 }
