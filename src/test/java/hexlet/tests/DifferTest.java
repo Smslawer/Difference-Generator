@@ -23,13 +23,13 @@ class DifferTest {
                   - id: 45
                   + id: null
                   - key1: value1
-                  + key2: null
+                  + key2: value2
                     numbers1: [1, 2, 3, 4]
                   - numbers2: [2, 3, 4, 5]
                   + numbers2: [22, 33, 44, 55]
                   - numbers3: [3, 4, 5]
-                  + numbers4: null
-                  + obj1: null
+                  + numbers4: [4, 5, 6]
+                  + obj1: {nestedKey=value, isNested=true}
                   - setting1: Some value
                   + setting1: Another value
                   - setting2: 200
@@ -39,11 +39,11 @@ class DifferTest {
                 }""";
         String actualJson = Differ.generate(new File("./src/test/resources/filepath1.json"),
                 new File("./src/test/resources/filepath2.json"), "stylish");
-        assertThat(expected).isEqualTo(actualJson);
+        assertThat(actualJson).isEqualTo(expected);
 
         String actualYaml = Differ.generate(new File("./src/test/resources/fileyaml1.yml"),
                 new File("./src/test/resources/fileyaml2.yml"), "stylish");
-        assertThat(expected).isEqualTo(actualYaml);
+        assertThat(actualYaml).isEqualTo(expected);
     }
 
     @Test
@@ -66,44 +66,11 @@ class DifferTest {
                 Property 'setting3' was updated. From true to 'none'""";
         String actualJson = Differ.generate(new File("./src/test/resources/filepath1.json"),
                 new File("./src/test/resources/filepath2.json"), "plain");
-        assertThat(expected).isEqualTo(actualJson);
+        assertThat(actualJson).isEqualTo(expected);
 
         String actualYaml = Differ.generate(new File("./src/test/resources/fileyaml1.yml"),
                 new File("./src/test/resources/fileyaml2.yml"), "plain");
-        assertThat(expected).isEqualTo(actualYaml);
-    }
-
-    @Test
-    void testDifferYaml() throws Exception {
-        String expected = """
-                {\s
-                    chars1: [a, b, c]
-                  - chars2: [d, e, f]
-                  + chars2: false
-                  - checked: false
-                  + checked: true
-                  - default: null
-                  + default: [value1, value2]
-                  - id: 45
-                  + id: null
-                  - key1: value1
-                  + key2: null
-                    numbers1: [1, 2, 3, 4]
-                  - numbers2: [2, 3, 4, 5]
-                  + numbers2: [22, 33, 44, 55]
-                  - numbers3: [3, 4, 5]
-                  + numbers4: null
-                  + obj1: null
-                  - setting1: Some value
-                  + setting1: Another value
-                  - setting2: 200
-                  + setting2: 300
-                  - setting3: true
-                  + setting3: none
-                }""";
-        String actual = Differ.generate(new File("./src/test/resources/fileyaml1.yml"),
-                new File("./src/test/resources/fileyaml2.yml"), "stylish");
-        assertThat(expected).isEqualTo(actual);
+        assertThat(actualYaml).isEqualTo(expected);
     }
 
     @Test
@@ -111,10 +78,10 @@ class DifferTest {
         String expected = "one of the files is empty";
         String actual = Differ.generate(new File("./src/test/resources/filepath1.json"),
                 new File("./src/test/resources/result.json"), "stylish");
-        assertThat(expected).isEqualTo(actual);
+        assertThat(actual).isEqualTo(expected);
 
         String actual2 = Differ.generate(new File("./src/test/resources/fileyaml1.yml"),
                 new File("./src/test/resources/emptyResult.yml"), "stylish");
-        assertThat(expected).isEqualTo(actual2);
+        assertThat(actual2).isEqualTo(expected);
     }
 }

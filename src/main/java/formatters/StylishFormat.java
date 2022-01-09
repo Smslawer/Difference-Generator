@@ -9,16 +9,16 @@ public class StylishFormat {
         for (TreeMap<String, Object> diffs : differences) {
             switch (diffs.get("diff").toString()) {
                 case "removed" -> result.append("  - ").append(diffs.get("name")).append(": ")
-                        .append(diffs.get("value1")).append("\n");
+                        .append(diffs.get("value")).append("\n");
                 case "added" -> result.append("  + ").append(diffs.get("name")).append(": ")
-                        .append(diffs.get("value2")).append("\n");
+                        .append(diffs.get("value")).append("\n");
                 case "unchanged" -> result.append("    ").append(diffs.get("name")).append(": ")
-                        .append(diffs.get("value1")).append("\n");
+                        .append(diffs.get("value")).append("\n");
                 default -> {
                     result.append("  - ").append(diffs.get("name")).append(": ")
-                            .append(diffs.get("value1")).append("\n");
+                            .append(diffs.get("value")).append("\n");
                     result.append("  + ").append(diffs.get("name")).append(": ")
-                            .append(diffs.get("value2")).append("\n");
+                            .append(diffs.get("newValue")).append("\n");
                 }
             }
 

@@ -15,7 +15,7 @@ public class PlainFormat {
                         .append(diffs.get("name")).append("'").append(" was removed").append("\n");
                 case "added" -> result.append("Property ").append(isArrayOrObject(diffs.get("name")))
                         .append(" was added with value: ")
-                        .append(isArrayOrObject(diffs.get("value1")))
+                        .append(isArrayOrObject(diffs.get("value")))
                         .append("\n");
                 case "unchanged" -> result.append("Property ").append(isArrayOrObject(diffs.get("name")))
                         .append(" is unchanged")
@@ -23,8 +23,8 @@ public class PlainFormat {
                 default -> {
                     result.append("Property ").append(isArrayOrObject(diffs.get("name")))
                             .append(" was updated. From ")
-                            .append(isArrayOrObject(diffs.get("value1"))).append(" to ")
-                            .append(isArrayOrObject(diffs.get("value2")))
+                            .append(isArrayOrObject(diffs.get("value"))).append(" to ")
+                            .append(isArrayOrObject(diffs.get("newValue")))
                             .append("\n");
                 }
             }

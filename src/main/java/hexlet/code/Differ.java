@@ -30,21 +30,20 @@ public class Differ {
             if (!valueFilepath2.containsKey(key)) {
                 combinedMap.put("diff", "removed");
                 combinedMap.put("name", key);
-                combinedMap.put("value1", valueFilepath1.get(key));
+                combinedMap.put("value", valueFilepath1.get(key));
             } else if (!valueFilepath1.containsKey(key)) {
                 combinedMap.put("diff", "added");
                 combinedMap.put("name", key);
-                combinedMap.put("value1", valueFilepath2.get(key));
+                combinedMap.put("value", valueFilepath2.get(key));
             } else if (!Objects.equals(valueFilepath1.get(key), valueFilepath2.get(key))) {
                 combinedMap.put("diff", "updated");
                 combinedMap.put("name", key);
-                combinedMap.put("value1", valueFilepath1.get(key));
-                combinedMap.put("value2", valueFilepath2.get(key));
+                combinedMap.put("value", valueFilepath1.get(key));
+                combinedMap.put("newValue", valueFilepath2.get(key));
             } else {
                 combinedMap.put("diff", "unchanged");
                 combinedMap.put("name", key);
-                combinedMap.put("value1", valueFilepath1.get(key));
-                combinedMap.put("value2", valueFilepath2.get(key));
+                combinedMap.put("value", valueFilepath1.get(key));
             }
             differences.add(combinedMap);
         }
