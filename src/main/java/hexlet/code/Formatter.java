@@ -1,24 +1,25 @@
 package hexlet.code;
 
+import formatters.JsonFormat;
 import formatters.PlainFormat;
 import formatters.StylishFormat;
 
+import java.io.IOException;
+import java.util.List;
 import java.util.TreeMap;
 
-import static hexlet.code.Differ.genDiff;
 
 public class Formatter {
-    public static String choiceFormat(String format, TreeMap<String, Object> valueFilepath1,
-                                      TreeMap<String, Object> valueFilepath2) {
+    public static String choiceFormat(String format, List<TreeMap<String, Object>> differences) throws IOException {
         switch (format) {
             case "plain" -> {
-                return PlainFormat.plain(genDiff(valueFilepath1, valueFilepath2));
+                return PlainFormat.plain(differences);
             }
-            case "456" -> {
-                return "456";
+            case "json" -> {
+                return JsonFormat.json(differences);
             }
             default -> {
-                return StylishFormat.stylish(genDiff(valueFilepath1, valueFilepath2));
+                return StylishFormat.stylish(differences);
             }
         }
     }

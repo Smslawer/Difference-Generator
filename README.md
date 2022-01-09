@@ -14,3 +14,17 @@
 <img src="https://asciinema.org/a/0WsqoONc44yGHneQ4eqfoKUXw.svg" />
 </a>
 
+## Asciinema with "stylish" format for .json and .yml file
+<a href="https://asciinema.org/a/s5iQr95pc2icRLKEzm9Bd98j8" target="_blank">
+<img src="https://asciinema.org/a/s5iQr95pc2icRLKEzm9Bd98j8.svg" />
+</a>
+
+## Asciinema with "plain" format for .json and .yml file
+<a href="https://asciinema.org/a/Lgipw5dGhzypI8pk3rupET0lM" target="_blank">
+<img src="https://asciinema.org/a/Lgipw5dGhzypI8pk3rupET0lM.svg" />
+</a>
+
+## Asciinema with "json" format for .json and .yml file
+<a href="https://asciinema.org/a/JZEcjeRxOHHK7XNJZpzTZoYdS" target="_blank">
+<img src="https://asciinema.org/a/JZEcjeRxOHHK7XNJZpzTZoYdS.svg" />
+</a>

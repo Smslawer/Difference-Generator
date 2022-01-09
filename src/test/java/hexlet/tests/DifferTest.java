@@ -74,14 +74,99 @@ class DifferTest {
     }
 
     @Test
+    void testDifferJson() throws Exception {
+        String expected = """
+                [ {
+                  "diff" : "unchanged",
+                  "name" : "chars1",
+                  "value" : [ "a", "b", "c" ]
+                }, {
+                  "diff" : "updated",
+                  "name" : "chars2",
+                  "newValue" : false,
+                  "value" : [ "d", "e", "f" ]
+                }, {
+                  "diff" : "updated",
+                  "name" : "checked",
+                  "newValue" : true,
+                  "value" : false
+                }, {
+                  "diff" : "updated",
+                  "name" : "default",
+                  "newValue" : [ "value1", "value2" ],
+                  "value" : null
+                }, {
+                  "diff" : "updated",
+                  "name" : "id",
+                  "newValue" : null,
+                  "value" : 45
+                }, {
+                  "diff" : "removed",
+                  "name" : "key1",
+                  "value" : "value1"
+                }, {
+                  "diff" : "added",
+                  "name" : "key2",
+                  "value" : "value2"
+                }, {
+                  "diff" : "unchanged",
+                  "name" : "numbers1",
+                  "value" : [ 1, 2, 3, 4 ]
+                }, {
+                  "diff" : "updated",
+                  "name" : "numbers2",
+                  "newValue" : [ 22, 33, 44, 55 ],
+                  "value" : [ 2, 3, 4, 5 ]
+                }, {
+                  "diff" : "removed",
+                  "name" : "numbers3",
+                  "value" : [ 3, 4, 5 ]
+                }, {
+                  "diff" : "added",
+                  "name" : "numbers4",
+                  "value" : [ 4, 5, 6 ]
+                }, {
+                  "diff" : "added",
+                  "name" : "obj1",
+                  "value" : {
+                    "nestedKey" : "value",
+                    "isNested" : true
+                  }
+                }, {
+                  "diff" : "updated",
+                  "name" : "setting1",
+                  "newValue" : "Another value",
+                  "value" : "Some value"
+                }, {
+                  "diff" : "updated",
+                  "name" : "setting2",
+                  "newValue" : 300,
+                  "value" : 200
+                }, {
+                  "diff" : "updated",
+                  "name" : "setting3",
+                  "newValue" : "none",
+                  "value" : true
+                } ]""";
+
+        String actualJson = Differ.generate(new File("./src/test/resources/filepath1.json"),
+                new File("./src/test/resources/filepath2.json"), "json");
+        assertThat(actualJson).isEqualTo(expected);
+
+        String actualYaml = Differ.generate(new File("./src/test/resources/fileyaml1.yml"),
+                new File("./src/test/resources/fileyaml2.yml"), "json");
+        assertThat(actualYaml).isEqualTo(expected);
+    }
+
+    @Test
     void testDifferIfEmpty() throws Exception {
         String expected = "one of the files is empty";
         String actual = Differ.generate(new File("./src/test/resources/filepath1.json"),
-                new File("./src/test/resources/result.json"), "stylish");
+                new File("./src/test/resources/emptyJSON.json"), "stylish");
         assertThat(actual).isEqualTo(expected);
 
         String actual2 = Differ.generate(new File("./src/test/resources/fileyaml1.yml"),
-                new File("./src/test/resources/emptyResult.yml"), "stylish");
+                new File("./src/test/resources/emptyYML.yml"), "stylish");
         assertThat(actual2).isEqualTo(expected);
     }
 }

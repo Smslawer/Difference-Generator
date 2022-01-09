@@ -17,7 +17,7 @@ public class Differ {
         if (valueFilepath1.isEmpty() || valueFilepath2.isEmpty()) {
             return "one of the files is empty";
         }
-        return Formatter.choiceFormat(format, valueFilepath1, valueFilepath2);
+        return Formatter.choiceFormat(format, genDiff(valueFilepath1, valueFilepath2));
     }
 
     public static List<TreeMap<String, Object>> genDiff(TreeMap<String, Object> valueFilepath1,
