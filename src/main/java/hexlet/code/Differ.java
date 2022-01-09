@@ -2,40 +2,52 @@ package hexlet.code;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
+import java.util.Set;
 import java.util.TreeMap;
+import java.util.TreeSet;
+import java.util.ArrayList;
+import java.util.Objects;
 
 public class Differ {
 
-    public static String generate(File filepath1, File filepath2) throws IOException {
-        StringBuilder result = new StringBuilder("{ \n");
+    public static String generate(File filepath1, File filepath2, String format) throws IOException {
         TreeMap<String, Object> valueFilepath1 = Parser.parse(filepath1);
         TreeMap<String, Object> valueFilepath2 = Parser.parse(filepath2);
         if (valueFilepath1.isEmpty() || valueFilepath2.isEmpty()) {
             return "one of the files is empty";
         }
-        for (String key : valueFilepath1.keySet()) {
-            if (valueFilepath2.containsKey(key)) {
-                if (valueFilepath1.get(key).equals(valueFilepath2.get(key))) {
-                    result.append("    ").append(key).append(": ")
-                            .append(valueFilepath1.get(key).toString()).append("\n");
-                } else {
-                    result.append("  - ").append(key).append(": ")
-                            .append(valueFilepath1.get(key).toString()).append("\n");
-                    result.append("  + ").append(key).append(": ")
-                            .append(valueFilepath2.get(key).toString()).append("\n");
-                }
+        return Formatter.choiceFormat(format, valueFilepath1, valueFilepath2);
+    }
+
+    public static List<TreeMap<String, Object>> genDiff(TreeMap<String, Object> valueFilepath1,
+                                                        TreeMap<String, Object> valueFilepath2) {
+        Set<String> keys = new TreeSet<>(valueFilepath1.keySet());
+        keys.addAll(valueFilepath2.keySet());
+        List<TreeMap<String, Object>> differences = new ArrayList<>();
+        for (String key : keys) {
+            TreeMap<String, Object> combinedMap = new TreeMap<>();
+            if (!valueFilepath2.containsKey(key)) {
+                combinedMap.put("diff", "removed");
+                combinedMap.put("name", key);
+                combinedMap.put("value1", valueFilepath1.get(key));
+            } else if (!valueFilepath1.containsKey(key)) {
+                combinedMap.put("diff", "added");
+                combinedMap.put("name", key);
+                combinedMap.put("value1", valueFilepath2.get(key));
+            } else if (!Objects.equals(valueFilepath1.get(key), valueFilepath2.get(key))) {
+                combinedMap.put("diff", "updated");
+                combinedMap.put("name", key);
+                combinedMap.put("value1", valueFilepath1.get(key));
+                combinedMap.put("value2", valueFilepath2.get(key));
             } else {
-                result.append("  - ").append(key).append(": ")
-                        .append(valueFilepath1.get(key).toString()).append("\n");
+                combinedMap.put("diff", "unchanged");
+                combinedMap.put("name", key);
+                combinedMap.put("value1", valueFilepath1.get(key));
+                combinedMap.put("value2", valueFilepath2.get(key));
             }
+            differences.add(combinedMap);
         }
-        for (String key : valueFilepath2.keySet()) {
-            if (!valueFilepath1.containsKey(key)) {
-                result.append("  + ").append(key).append(": ")
-                        .append(valueFilepath2.get(key).toString()).append("\n");
-            }
-        }
-        result.append("}");
-        return result.toString();
+        return differences;
     }
 }
