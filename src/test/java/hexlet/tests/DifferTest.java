@@ -37,11 +37,11 @@ class DifferTest {
                   - setting3: true
                   + setting3: none
                 }""";
-        String actualJson = Differ.generate(new File("./src/test/resources/filepath1.json"),
+        String actualJson = Differ.generate(new File(new File("./src/test/resources/filepath1.json").getAbsolutePath()),
                 new File("./src/test/resources/filepath2.json"), "stylish");
         assertThat(actualJson).isEqualTo(expected);
 
-        String actualYaml = Differ.generate(new File("./src/test/resources/fileyaml1.yml"),
+        String actualYaml = Differ.generate(new File(new File("./src/test/resources/fileyaml1.yml").getAbsolutePath()),
                 new File("./src/test/resources/fileyaml2.yml"), "stylish");
         assertThat(actualYaml).isEqualTo(expected);
     }

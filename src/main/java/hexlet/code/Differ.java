@@ -20,6 +20,10 @@ public class Differ {
         return Formatter.choiceFormat(format, genDiff(valueFilepath1, valueFilepath2));
     }
 
+    public static String generate(File filepath1, File filepath2) throws IOException {
+        return generate(filepath1, filepath2, "stylish");
+    }
+
     public static List<TreeMap<String, Object>> genDiff(TreeMap<String, Object> valueFilepath1,
                                                         TreeMap<String, Object> valueFilepath2) {
         Set<String> keys = new TreeSet<>(valueFilepath1.keySet());
