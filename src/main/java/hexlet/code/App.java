@@ -5,7 +5,6 @@ import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
 import picocli.CommandLine.Parameters;
 
-import java.io.File;
 import java.util.concurrent.Callable;
 
 
@@ -14,10 +13,10 @@ import java.util.concurrent.Callable;
 public class App implements Callable<Integer> {
 
     @Parameters(index = "0", defaultValue = "./src/test/resources/filepath1.json", description = "path to first file")
-    private File filepath1;
+    private String filepath1;
 
     @Parameters(index = "1", defaultValue = "./src/test/resources/filepath2.json", description = "path to second file")
-    private File filepath2;
+    private String filepath2;
 
     @Option(names = {"-f", "--format"}, paramLabel = "format",
             defaultValue = "stylish", description = "output format [default: stylish]")
@@ -33,7 +32,7 @@ public class App implements Callable<Integer> {
         return 0;
     }
 
-    public static void main(String... args) throws Exception {
+    public static void main(String... args)  {
         int exitCode = new CommandLine(new App()).execute(args);
         System.exit(exitCode);
     }

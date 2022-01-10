@@ -3,8 +3,6 @@ package hexlet.tests;
 import hexlet.code.Differ;
 import org.junit.jupiter.api.Test;
 
-import java.io.File;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 class DifferTest {
@@ -37,12 +35,12 @@ class DifferTest {
                   - setting3: true
                   + setting3: none
                 }""";
-        String actualJson = Differ.generate(new File(new File("./src/test/resources/filepath1.json").getAbsolutePath()),
-                new File("./src/test/resources/filepath2.json"), "stylish");
+        String actualJson = Differ.generate("./src/test/resources/filepath1.json",
+                "./src/test/resources/filepath2.json", "stylish");
         assertThat(actualJson).isEqualTo(expected);
 
-        String actualYaml = Differ.generate(new File(new File("./src/test/resources/fileyaml1.yml").getAbsolutePath()),
-                new File("./src/test/resources/fileyaml2.yml"), "stylish");
+        String actualYaml = Differ.generate("./src/test/resources/fileyaml1.yml",
+                "./src/test/resources/fileyaml2.yml", "stylish");
         assertThat(actualYaml).isEqualTo(expected);
     }
 
@@ -64,12 +62,12 @@ class DifferTest {
                 Property 'setting1' was updated. From 'Some value' to 'Another value'
                 Property 'setting2' was updated. From 200 to 300
                 Property 'setting3' was updated. From true to 'none'""";
-        String actualJson = Differ.generate(new File("./src/test/resources/filepath1.json"),
-                new File("./src/test/resources/filepath2.json"), "plain");
+        String actualJson = Differ.generate("./src/test/resources/filepath1.json",
+                "./src/test/resources/filepath2.json", "plain");
         assertThat(actualJson).isEqualTo(expected);
 
-        String actualYaml = Differ.generate(new File("./src/test/resources/fileyaml1.yml"),
-                new File("./src/test/resources/fileyaml2.yml"), "plain");
+        String actualYaml = Differ.generate("./src/test/resources/fileyaml1.yml",
+                "./src/test/resources/fileyaml2.yml", "plain");
         assertThat(actualYaml).isEqualTo(expected);
     }
 
@@ -149,24 +147,24 @@ class DifferTest {
                   "value" : true
                 } ]""";
 
-        String actualJson = Differ.generate(new File("./src/test/resources/filepath1.json"),
-                new File("./src/test/resources/filepath2.json"), "json");
+        String actualJson = Differ.generate("./src/test/resources/filepath1.json",
+                "./src/test/resources/filepath2.json", "json");
         assertThat(actualJson).isEqualTo(expected);
 
-        String actualYaml = Differ.generate(new File("./src/test/resources/fileyaml1.yml"),
-                new File("./src/test/resources/fileyaml2.yml"), "json");
+        String actualYaml = Differ.generate("./src/test/resources/fileyaml1.yml",
+                "./src/test/resources/fileyaml2.yml", "json");
         assertThat(actualYaml).isEqualTo(expected);
     }
 
     @Test
     void testDifferIfEmpty() throws Exception {
         String expected = "one of the files is empty";
-        String actual = Differ.generate(new File("./src/test/resources/filepath1.json"),
-                new File("./src/test/resources/emptyJSON.json"), "stylish");
+        String actual = Differ.generate("./src/test/resources/filepath1.json",
+                "./src/test/resources/emptyJSON.json");
         assertThat(actual).isEqualTo(expected);
 
-        String actual2 = Differ.generate(new File("./src/test/resources/fileyaml1.yml"),
-                new File("./src/test/resources/emptyYML.yml"), "stylish");
+        String actual2 = Differ.generate("./src/test/resources/fileyaml1.yml",
+                "./src/test/resources/emptyYML.yml");
         assertThat(actual2).isEqualTo(expected);
     }
 }
