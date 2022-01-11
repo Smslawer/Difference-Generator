@@ -5,7 +5,7 @@ import java.util.TreeMap;
 
 public class StylishFormat {
     public static String stylish(List<TreeMap<String, Object>> differences) {
-        StringBuilder result = new StringBuilder("{ \n");
+        StringBuilder result = new StringBuilder("{\n");
         for (TreeMap<String, Object> diffs : differences) {
             switch (diffs.get("diff").toString()) {
                 case "removed" -> result.append("  - ").append(diffs.get("name")).append(": ")
