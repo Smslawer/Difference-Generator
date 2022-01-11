@@ -17,16 +17,14 @@ public class PlainFormat {
                         .append(" was added with value: ")
                         .append(isArrayOrObject(diffs.get("value")))
                         .append("\n");
-                case "unchanged" -> result.append("Property ").append(isArrayOrObject(diffs.get("name")))
-                        .append(" is unchanged")
-                        .append("\n");
-                default -> {
+                case "updated" ->
                     result.append("Property ").append(isArrayOrObject(diffs.get("name")))
                             .append(" was updated. From ")
                             .append(isArrayOrObject(diffs.get("value"))).append(" to ")
                             .append(isArrayOrObject(diffs.get("newValue")))
                             .append("\n");
-                }
+
+                default -> result.append("");
             }
 
         }
