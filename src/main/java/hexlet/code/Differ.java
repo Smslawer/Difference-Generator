@@ -14,9 +14,6 @@ public class Differ {
         TreeMap<String, Object> valueFilepath1 = Parser.parse(firstPath);
         TreeMap<String, Object> valueFilepath2 = Parser.parse(secondPath);
 
-        if (valueFilepath1.isEmpty() || valueFilepath2.isEmpty()) {
-            return "one of the files is empty";
-        }
         return Formatter.choiceFormat(format, GenerateDifferences.genDiff(valueFilepath1, valueFilepath2));
     }
 

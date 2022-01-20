@@ -9,8 +9,9 @@ import java.util.TreeMap;
 
 public class Parser {
     public static TreeMap<String, Object> parse(String filepath) throws IOException {
-        if (filepath.isEmpty()) {
-            return new TreeMap<>();
+        if (filepath.replaceAll("\\{", "").replaceAll("}", "")
+                .trim().isEmpty()) {
+            throw new IOException("one of the files is empty");
         }
         ObjectMapper mapper = filepath.endsWith(".json")
                 ? new ObjectMapper() : new ObjectMapper(new YAMLFactory());
