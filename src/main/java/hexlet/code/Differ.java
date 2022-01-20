@@ -1,18 +1,13 @@
 package hexlet.code;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.TreeMap;
 
 public class Differ {
 
     public static String generate(String filepath1, String filepath2, String format) throws IOException {
-        String firstPath = Files.readString(Path.of(filepath1).toAbsolutePath().normalize());
-        String secondPath = Files.readString(Path.of(filepath2).toAbsolutePath().normalize());
-
-        TreeMap<String, Object> valueFilepath1 = Parser.parse(firstPath);
-        TreeMap<String, Object> valueFilepath2 = Parser.parse(secondPath);
+        TreeMap<String, Object> valueFilepath1 = Parser.parse(filepath1);
+        TreeMap<String, Object> valueFilepath2 = Parser.parse(filepath2);
 
         return Formatter.choiceFormat(format, GenerateDifferences.genDiff(valueFilepath1, valueFilepath2));
     }
