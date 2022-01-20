@@ -29,7 +29,7 @@ public class App implements Callable<Integer> {
      * ВОПРОС К ПРОВЕРЯЮЩЕМУ! Не понял как тестировать этот класс.
      *
      * Уверен, что вызывать System.out.println() в методе call() плохая идея, но не разобрался,
-     * как по другому.
+     * как по другому?
      */
     @Override
     public Integer call() throws Exception {
